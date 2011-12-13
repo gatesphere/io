@@ -1,3 +1,24 @@
+Io Language for Cygwin
+======================
+This is a slight modification of a few files to allow Io to build on Cygwin.  These changes are cross-platform compatibility breaking, so there won't be a pull request upstream for the forseeable future.
+
+To make on cygwin:
+
+  git clone https://github.com/gatesphere/io.git
+  cd io
+  mkdir build
+  cd build
+  cmake ..
+  make
+  make install
+  cd ..
+  ./fixlibs.sh
+  export PATH=/usr/local/lib/:$PATH
+  
+And you *should* be good to go.  No guarantees though.
+-->Jake
+
+Original README.md contents follow:
 
 ABOUT
 =====
@@ -26,16 +47,16 @@ OSX
 
 If you are using the homebrew package manager you can install Io (though it may not be the latest version) with:
 
-	brew install io
+  brew install io
 
 Note: Assuming you wish to install to an alternate location, ensure you supply as an argument to the following command, a `-DCMAKE_INSTALL_PREFIX=/path` where `/path` is where you wish to install Io to. This is akin to setting `INSTALL_PREFIX` with the old build system if you are familiar with it, or `--prefix` with GNU autotools if you are familiar with that suite.
 
 Ensure you are at the top level of the source tree, that is where this file lives. From here, you are in the right spot to enter these commands:
 
-	mkdir build
-	cd build
-	cmake ..
-	make install
+  mkdir build
+  cd build
+  cmake ..
+  make install
 
 If you do not wish to install, just run `make` instead of `make install`. Currently there is no analogue to the old `make linkInstall`. However, if you have used `linkInstall` in previous versions of Io, you should never have to run `linkInstall` again, since it created symbolic links to where your Io source was at that time. The only time you would have to do this again, is if you moved the Io source from one dir to another. Most people don't.
 
@@ -44,11 +65,11 @@ Any Linux Distribution
 
 Any Linux distribution will require one additional step be taken. This is because GNU ld is what's technically known as a "dumb" linker -- it has to be told to regenerate its hash of libraries if something changes, other platforms do not have this problem. To complete this step, run the following command:
 
-	ldconfig
+  ldconfig
 
 If you are still getting an error when loading the `io` binary about not being able to find some shared library, then ensure you have the following path, in your `/etc/ld.so.conf` (or equivalent):
 
-	/usr/local/lib
+  /usr/local/lib
 
 The above path will change depending on what you set your `CMAKE_INSTALL_PREFIX` to, it will be whatever that is with `/lib` appended. The default is `/usr/local` so the above will work for the common case.
 
@@ -87,10 +108,10 @@ You will also need to add `<install_drive>:\<install_directory>\bin` and `<insta
 8. `cd` to your Io root folder
 9. We want to do an out-of-source build, so: `mkdir buildroot` and `cd buildroot`
 10. a) `cmake ..`
-	
-	or
-	
-	b) `cmake -DCMAKE_INSTALL_PREFIX=<install_drive>:\<install_directory> ..` (eg: `cmake -DCMAKE_INSTALL_PREFIX=C:\Io ..`)
+  
+  or
+  
+  b) `cmake -DCMAKE_INSTALL_PREFIX=<install_drive>:\<install_directory> ..` (eg: `cmake -DCMAKE_INSTALL_PREFIX=C:\Io ..`)
 11. `nmake`
 12. `nmake install`
 
@@ -104,10 +125,10 @@ For non-automatic MinGW install and detailed instructions refer to: <http://www.
 1. `cd` to your Io root folder
 2. We want to do an out-of-source build, so: `mkdir buildroot` and `cd buildroot`
 3. a) `cmake -G"MSYS Makefiles" ..`
-	
-	or
-	
-	b) `cmake -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=<install_drive>:/<install_directory> ..` (eg: `cmake -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=C:/Io ..`)
+  
+  or
+  
+  b) `cmake -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=<install_drive>:/<install_directory> ..` (eg: `cmake -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=C:/Io ..`)
 4. `make`
 5. `make install`
 
@@ -119,10 +140,10 @@ Install Cygwin from: <http://www.cygwin.com/>
 1. `cd` to your Io root folder
 2. We want to do an out-of-source build, so: `mkdir buildroot` and `cd buildroot`
 3. a) `cmake ..`
-	
-	or
-	
-	b) `cmake -DCMAKE_INSTALL_PREFIX=<install_drive>:/<install_directory> ..` (eg: `cmake -DCMAKE_INSTALL_PREFIX=C:/Io ..`)
+  
+  or
+  
+  b) `cmake -DCMAKE_INSTALL_PREFIX=<install_drive>:/<install_directory> ..` (eg: `cmake -DCMAKE_INSTALL_PREFIX=C:/Io ..`)
 4. `make`
 5. `make install`
 
@@ -134,4 +155,4 @@ RUNNING TESTS
 
 You should be inside your out-of-source build dir. The vm tests can be run with the command:
 
-	io ../libs/iovm/tests/correctness/run.io
+  io ../libs/iovm/tests/correctness/run.io
