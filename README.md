@@ -4,16 +4,16 @@ This is a slight modification of a few files to allow Io to build on Cygwin.  Th
 
 To make on cygwin:
 
-  git clone https://github.com/gatesphere/io.git
-  cd io
-  mkdir build
-  cd build
-  cmake ..
-  make
-  make install
-  cd ..
-  ./fixlibs.sh
-  export PATH=/usr/local/lib/:$PATH
+    git clone https://github.com/gatesphere/io.git
+    cd io
+    mkdir build
+    cd build
+    cmake ..
+    make
+    make install
+    cd ..
+    ./fixlibs.sh
+    export PATH=/usr/local/lib/:$PATH
   
 And you *should* be good to go.  No guarantees though.
 -->Jake
