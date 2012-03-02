@@ -95,7 +95,7 @@ Kudos to Daniel A. Koepke
 
   #endif
   */
-  
+
 #elif defined(__MINGW32__)
 
   #ifdef IO_IN_C_FILE
