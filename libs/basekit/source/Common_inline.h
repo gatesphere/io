@@ -52,6 +52,7 @@ Kudos to Daniel A. Koepke
 
 #if defined(__APPLE__) 
 
+<<<<<<< HEAD
   #define NS_INLINE static __inline__ __attribute__((always_inline))
 
   #ifdef IO_IN_C_FILE
